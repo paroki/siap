@@ -26,4 +26,4 @@ deploy:
   - provider: script
     script: etc/travis/deploy.sh
     on:
-      branch: master
+      branch: travis-build
