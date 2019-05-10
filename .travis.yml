@@ -5,10 +5,16 @@ cache:
     - $HOME/.composer/cache
     - $HOME/.npm
 
+stages:
+  - test
+  - deploy
+  
 jobs:
   include:
-    - php: '7.2'
-    - php: '7.3'
+    - stage: test
+      php: '7.2'
+    - stage: test
+      php: '7.3'
     - stage: deploy
       php: '7.2'
       deploy:
