@@ -28,5 +28,6 @@ before_deploy:
 deploy:
   - provider: script
     script: etc/travis/deploy.sh
+    skip_cleanup: true
     on:
       branch: travis-build
