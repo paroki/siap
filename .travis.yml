@@ -18,7 +18,8 @@ script:
 - ./bin/phpunit
 
 before_deploy:
-- openssl aes-256-cbc -K $encrypted_6041831ee8a2_key -iv $encrypted_6041831ee8a2_iv -in deploy_key.enc -out deploy_key -d
+- openssl aes-256-cbc -K $encrypted_6041831ee8a2_key -iv $encrypted_6041831ee8a2_iv
+  -in etc/travis/deploy_key.enc -out deploy_key -d
 - eval "$(ssh-agent -s)"
 - chmod 600 ./deploy_key
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
