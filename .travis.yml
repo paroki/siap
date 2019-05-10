@@ -12,7 +12,7 @@ jobs:
 install:
   - cp etc/travis/env.local .env.local
   - yarn install
-  - composer install
+  - composer install --ansi
 
 script:
 - ./bin/phpunit

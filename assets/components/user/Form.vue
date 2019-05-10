@@ -29,6 +29,7 @@
                 type: [Array, Object],
                 default: () => []
             },
+
             handleSubmit: {
                 type: Function,
                 required: true
