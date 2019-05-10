@@ -15,15 +15,25 @@ jobs:
       php: '7.2'
     - stage: test
       php: '7.3'
+    - stage: test
+      php: '7.3'
+      env: COVERAGE=yes
     - stage: deploy
       php: '7.2'
+      install: "echo 'No install required'"
+      script: "echo 'No script during deploy'"
       deploy:
         provider: script
         script: etc/travis/deploy.sh
         skip_cleanup: true
         on:
           branch: travis-build
+  allow_failures:
+    - env: COVERAGE=yes
 
+before_install:
+  # remove xdebug when not collecting code coverage
+  - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi;
 install:
   - cp etc/travis/env.local .env.local
   - yarn install
