@@ -5,8 +5,9 @@ cache:
     - $HOME/.composer/cache
     - $HOME/.npm
 
-include:
-  - php: '7.3'
+jobs:
+  include:
+    - php: '7.3'
 
 install:
   - yarn install
