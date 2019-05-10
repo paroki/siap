@@ -12,7 +12,7 @@
         "@coreui/icons": "^0.3.0",
         "@coreui/vue": "^2.1.2",
         "axios": "^0.18.0",
-        "bootstrap": "4",
+        "bootstrap": ">=4.3.1",
         "bootstrap-vue": "^2.0.0-rc.19",
         "font-awesome": "^4.7.0",
         "jsonwebtoken": "^8.5.1",

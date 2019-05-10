@@ -10,6 +10,7 @@ jobs:
     - php: '7.3'
 
 install:
+  - cp etc/travis/.env.local .
   - yarn install
   - composer install
 
@@ -27,4 +28,4 @@ deploy:
   - provider: script
     script: etc/travis/deploy.sh
     on:
-      branch: travis-build
+      branch: master|travis-build
