@@ -19,7 +19,6 @@ deploy_key.pub
 /public/build/
 npm-debug.log
 yarn-error.log
-yarn.lock
 ###< symfony/webpack-encore-bundle ###
 
 ###> lexik/jwt-authentication-bundle ###
