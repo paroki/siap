@@ -10,7 +10,7 @@ ARG TIMEZONE
 RUN apk upgrade --update && apk --no-cache add \
     gcc g++ make git autoconf tzdata openntpd libcurl curl-dev coreutils \
     libmcrypt-dev freetype-dev libxpm-dev libjpeg-turbo-dev libvpx-dev \
-    libpng-dev libxml2-dev postgresql-dev icu-dev pcre-dev libzip
+    libpng-dev libxml2-dev postgresql-dev icu-dev pcre-dev libzip-dev
 
 RUN apk add --no-cache bash
 
