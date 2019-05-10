@@ -7,6 +7,13 @@ cache:
 
 jobs:
   include:
+    - php: '7.2'
+      deploy:
+        - provider: script
+          script: etc/travis/deploy.sh
+          skip_cleanup: true
+          on:
+            branch: travis-build
     - php: '7.3'
 
 install:
@@ -25,10 +32,3 @@ before_deploy:
 - echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
 - chmod +x etc/travis/deploy.sh
-
-deploy:
-  - provider: script
-    script: etc/travis/deploy.sh
-    skip_cleanup: true
-    on:
-      branch: travis-build

@@ -1,11 +1,12 @@
 #!/bin/bash
 
 ssh -i ./deploy_key travis@$IP -p $PORT <<EOF
-  git pull origin master
   cd $DEPLOY_DIR
+  git pull origin master
   composer install --ansi
   yarn install
   yarn build
+  ./bin/console doctrine:database:create --if-not-exists
   ./bin/console doctrine:schema:update --force
   ./bin/console cache:clear
 EOF
