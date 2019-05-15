@@ -1,9 +1,9 @@
-import axios from 'axios'
-import { TokenService } from '@/services'
+import axios from "axios";
+import { TokenService } from "@/services";
 import SubmissionError from "../utils/SubmissionError";
 
 const ApiService = {
-    generateUrl(url){
+    generateUrl(url) {
         const path = process.env.VUE_APP_API_PATH;
         return `${url}/${path}`;
     },
@@ -11,29 +11,31 @@ const ApiService = {
     init(baseURL) {
         axios.defaults.baseURL = baseURL;
 
-        axios.interceptors.request.use(
-            (config) => {
-                const url = config.url.replace('api/api', 'api');
-                config.url = url;
-                return config;
-            }
-        );
+        axios.interceptors.request.use(config => {
+            const url = config.url.replace("api/api", "api");
+            config.url = url;
+            return config;
+        });
         axios.interceptors.response.use(
-            (response) => {
+            response => {
                 return response.data;
             },
-            (error) => {
+            error => {
                 const response = error.response;
                 const json = response.data;
 
-                if(json.violations){
-
-                    const errMsg = json['hydra:description'] ? json['hydra:description'] : response.statusText;
-                    const errors = { _error: errMsg }
+                if (json.violations) {
+                    const errMsg = json["hydra:description"]
+                        ? json["hydra:description"]
+                        : response.statusText;
+                    const errors = { _error: errMsg };
                     json.violations.map(violation =>
-                        Object.assign(errors, { [violation.propertyPath]: violation.message }));
+                        Object.assign(errors, {
+                            [violation.propertyPath]: violation.message
+                        })
+                    );
 
-                    throw new SubmissionError(errors)
+                    throw new SubmissionError(errors);
                 }
 
                 return Promise.reject(error);
@@ -42,11 +44,13 @@ const ApiService = {
     },
 
     setHeader() {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${TokenService.getToken()}`
+        axios.defaults.headers.common[
+            "Authorization"
+        ] = `Bearer ${TokenService.getToken()}`;
     },
 
     removeHeader() {
-        axios.defaults.headers.common = {}
+        axios.defaults.headers.common = {};
     },
 
     get(resource) {
@@ -54,7 +58,7 @@ const ApiService = {
     },
 
     post(resource, data) {
-        return axios.post(resource, data)
+        return axios.post(resource, data);
     },
 
     put(resource, data) {
@@ -62,7 +66,7 @@ const ApiService = {
     },
 
     delete(resource) {
-        return axios.delete(resource)
+        return axios.delete(resource);
     },
 
     /**
@@ -77,8 +81,8 @@ const ApiService = {
      *    - password
      **/
     customRequest(data) {
-        return axios(data)
+        return axios(data);
     }
-}
+};
 
-export default ApiService
+export default ApiService;

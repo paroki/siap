@@ -1,17 +1,17 @@
 export default [
     {
-        name: 'Dashboard',
-        icon: 'mdi-view-dashboard'
+        name: "Dashboard",
+        icon: "mdi-view-dashboard"
     },
     {
-        name: 'Administrasi',
-        icon: 'mdi-settings',
+        name: "Administrasi",
+        icon: "mdi-settings",
         children: [
             {
-                name: 'UserList',
-                label: 'User',
-                icon: 'mdi-shield-check',
-                url: '/user/'
+                name: "UserList",
+                label: "User",
+                icon: "mdi-shield-check",
+                url: "/user/"
             }
         ]
     }

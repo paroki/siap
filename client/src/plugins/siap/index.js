@@ -1,17 +1,13 @@
-import LoadingOverlay  from './LoadingOverlay';
+import LoadingOverlay from "./LoadingOverlay";
 
-const components = [
-    LoadingOverlay,
-];
+const components = [LoadingOverlay];
 
 export default {
-    install(Vue){
-        components.forEach((item) => {
+    install(Vue) {
+        components.forEach(item => {
             Vue.component(item.name, item);
         });
     }
-}
+};
 
-export {
-    LoadingOverlay
-}
+export { LoadingOverlay };

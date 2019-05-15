@@ -1,11 +1,11 @@
-import * as actions from './actions'
-import * as getters from './getters'
-import mutations from './mutations'
+import * as actions from "./actions";
+import * as getters from "./getters";
+import mutations from "./mutations";
 
 export default {
     namespaced: true,
     state: {
-        error: '',
+        error: "",
         isLoading: false,
         items: [],
         view: [],
@@ -16,9 +16,9 @@ export default {
             rowsPerPage: 5,
             sortBy: null,
             rowsPerPageItems: [5]
-        },
+        }
     },
     actions,
     getters,
     mutations
-}
+};

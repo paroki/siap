@@ -1,9 +1,9 @@
-import * as types from './mutation_types'
+import * as types from "./mutation_types";
 
 export default {
-    [types.RESET] (state) {
+    [types.RESET](state) {
         Object.assign(state, {
-            error: '',
+            error: "",
             isLoading: false,
             items: [],
             view: [],
@@ -15,30 +15,30 @@ export default {
                 sortBy: null,
                 rowsPerPageItems: [5]
             }
-        })
+        });
     },
 
-    [types.SET_ERROR] (state, error) {
-        Object.assign(state, { error })
+    [types.SET_ERROR](state, error) {
+        Object.assign(state, { error });
     },
 
-    [types.SET_ITEMS] (state, items) {
-        Object.assign(state, { items })
+    [types.SET_ITEMS](state, items) {
+        Object.assign(state, { items });
     },
 
-    [types.TOGGLE_LOADING] (state) {
-        Object.assign(state, { isLoading: !state.isLoading })
+    [types.TOGGLE_LOADING](state) {
+        Object.assign(state, { isLoading: !state.isLoading });
     },
 
-    [types.SET_VIEW] (state, view) {
-        Object.assign(state, { view })
+    [types.SET_VIEW](state, view) {
+        Object.assign(state, { view });
     },
 
-    [types.SET_PAGER] (state, pager) {
-        Object.assign(state, { pager })
+    [types.SET_PAGER](state, pager) {
+        Object.assign(state, { pager });
     },
 
-    [types.SET_TOTAL_ITEMS] (state, totalItems) {
-        Object.assign(state, { totalItems })
-    },
-}
+    [types.SET_TOTAL_ITEMS](state, totalItems) {
+        Object.assign(state, { totalItems });
+    }
+};

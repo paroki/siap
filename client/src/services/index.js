@@ -1,7 +1,4 @@
-import ApiService from './ApiService';
-import TokenService  from "./TokenService";
+import ApiService from "./ApiService";
+import TokenService from "./TokenService";
 
-export {
-    ApiService,
-    TokenService
-}
+export { ApiService, TokenService };
