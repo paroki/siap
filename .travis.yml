@@ -49,6 +49,7 @@ jobs:
   allow_failures:
     - env: COVERAGE=yes
     - env: INTEGRATION=yes
+    - env: DEPLOY=yes
 
 before_install:
   - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi;
