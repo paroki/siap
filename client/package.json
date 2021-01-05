@@ -11,7 +11,7 @@
     "dev-server": "webpack-dev-server --hot"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.11",
