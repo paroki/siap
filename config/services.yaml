@@ -32,6 +32,7 @@ services:
         public: true
 
     Paroki\User\UserPasswordHasher:
+        public: true
         bind:
             $processor: "@api_platform.doctrine.orm.state.persist_processor"
 
