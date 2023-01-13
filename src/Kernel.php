@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Paroki;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
