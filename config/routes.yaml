@@ -1,5 +1,8 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: Paroki\Controller
-    type: attribute
+#controllers:
+#    resource:
+#        path: ../src/User/Controller/
+#        namespace: Paroki\User\Controller
+#    type: attribute
+login:
+  path: /login
+  methods: ['POST']

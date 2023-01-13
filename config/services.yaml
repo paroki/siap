@@ -13,12 +13,29 @@ services:
 
     # makes classes in Paroki/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+    #Paroki\:
+    #    resource: '../src/'
+    #    exclude:
+    #        - '../src/DependencyInjection/'
+    #        - '../src/Entity/'
+    #        - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    Paroki\User\:
+        resource: '../src/User/'
+        exclude:
+            - '../src/User/DependencyInjection'
+            - '../src/User/Entity'
+            - '../src/User/Resources'
+            - '../src/User/UserPasswordHasher.php'
+        public: true
+
+    Paroki\User\UserPasswordHasher:
+        bind:
+            $processor: "@api_platform.doctrine.orm.state.persist_processor"
+
+    Symfony\Component\PasswordHasher\PasswordHasherInterface:
+        alias: Paroki\User\UserPasswordHasher
+
+

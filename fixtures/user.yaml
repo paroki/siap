@@ -1,0 +1,9 @@
+Paroki\User\Entity\User:
+  user:
+    email: user@example.com
+    password: '\$2y\$04\$XaggfXi6jm7gKXd3SX3hkOsWouuTDaVXojYzuKFGsd.xzKM/PY70.'
+    plainPassword: 'password'
+  admin:
+    email: admin@example.com
+    password: '\$2y\$04\$XaggfXi6jm7gKXd3SX3hkOsWouuTDaVXojYzuKFGsd.xzKM/PY70.'
+    roles: ['ROLE_ADMIN']

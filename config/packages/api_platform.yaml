@@ -1,0 +1,8 @@
+api_platform:
+  resource_class_directories:
+    - '%kernel.project_dir%/src/User/Entity'
+  swagger:
+    api_keys:
+      JWT:
+        name: Authorization
+        type: header
