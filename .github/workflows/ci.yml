@@ -44,8 +44,9 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Update project dependencies
         run: composer update --no-interaction --no-progress --ansi
-      - name: Create database
+      - name: Project Setup
         run: |
+          bin/console lexik:jwt:generate-keypair
           bin/console doctrine:database:create --env=test
           bin/console doctrine:schema:create --env=test
       - name: Clear test app cache
