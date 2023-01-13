@@ -26,13 +26,13 @@ jobs:
           sudo systemctl start postgresql
           sudo -u postgres psql -d template1 -c "CREATE USER siap WITH PASSWORD 'siap' CREATEDB"
       - name: Setup PHP
-          uses: shivammathur/setup-php@v2
-          with:
-            php-version: ${{ matrix.php }}
-            tools: pecl, composer
-            extensions: intl, bcmath, curl, openssl, mbstring, pdo_pgsql
-            coverage: none
-            ini-values: memory_limit=-1
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: pecl, composer
+          extensions: intl, bcmath, curl, openssl, mbstring, pdo_pgsql
+          coverage: none
+          ini-values: memory_limit=-1
       - name: Get composer cache directory
         id: composercache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
