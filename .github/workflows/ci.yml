@@ -44,10 +44,12 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Update project dependencies
         run: composer update --no-interaction --no-progress --ansi
-      #- name: Install PHPUnit
-      #  run: vendor/bin/simple-phpunit --version
+      - name: Create database
+        run: |
+          bin/console doctrine:database:create --env=test
+          bin/console doctrine:schema:create --env=test
       - name: Clear test app cache
         run: bin/console cache:clear --ansi
-      - name: Run Behat tests
+      - name: Run phpunit tests
         run: |
           vendor/bin/phpunit
