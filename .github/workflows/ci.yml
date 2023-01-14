@@ -129,14 +129,10 @@ jobs:
           bin/console doctrine:schema:create --env=test
       - name: Clear test app cache
         run: bin/console cache:clear --ansi
-      - name: Run phpunit tests
+      - name: Run behat tests
         run: |
           mkdir -p build/logs/behat
-          if [ "$COVERAGE" = '1' ]; then
-            vendor/bin/behat
-          else
-            vendor/bin/behat
-          fi
+          vendor/bin/behat -fprogress
       - name: Upload test artifacts
         if: always()
         uses: actions/upload-artifact@v3
@@ -150,6 +146,6 @@ jobs:
         with:
           directory: build/logs/behat
           name: behat-php${{ matrix.php }}
-          flags: phpunit
+          flags: behat
           fail_ci_if_error: true
         continue-on-error: true
