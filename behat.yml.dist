@@ -2,7 +2,35 @@ default:
     suites:
         default:
             contexts:
-                - App\Tests\Behat\DemoContext
+                - 'Behat\MinkExtension\Context\MinkContext'
+                - behatch:context:rest
+                - behatch:context:json
+                - Paroki\Tests\Behat\UserContext
 
     extensions:
-        FriendsOfBehat\SymfonyExtension: null
+        FriendsOfBehat\SymfonyExtension:
+            bootstrap: tests/bootstrap.php
+            kernel:
+                class: Paroki\Kernel
+                environment: test
+                debug: true
+        'Behat\MinkExtension':
+            base_url: 'http://example.com/'
+            files_path: 'features/files'
+            sessions:
+                default:
+                    symfony: ~
+        Behatch\Extension: ~
+        DVDoug\Behat\CodeCoverage\Extension:
+            filter:
+                include:
+                    directories:
+                        'src': ~
+                exclude:
+                    directories:
+                        'src/*/Test': ~
+            reports:
+                clover:
+                    target: build/logs/behat/clover.xml
+                text:
+                    showColors: true

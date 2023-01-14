@@ -39,7 +39,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     const ROLE_USER = 'ROLE_USER';
-    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_PAROKI_ADMIN = 'ROLE_PAROKI_ADMIN';
+    const ROLE_KEUSKUPAN_ADMIN = 'ROLE_KEUSKUPAN_ADMIN';
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+
 
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]

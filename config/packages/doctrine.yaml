@@ -16,6 +16,11 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Entity'
                 prefix: 'Paroki\User\Entity'
                 alias: ParokiUser
+            Referensi:
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Referensi/Entity'
+                prefix: 'Paroki\Referensi\Entity'
+                alias: Referensi
 
 when@test:
     doctrine:

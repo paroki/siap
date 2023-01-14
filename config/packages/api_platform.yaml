@@ -1,6 +1,8 @@
 api_platform:
+  path_segment_name_generator: Paroki\Core\SingularPathSegmentNameGenerator
   resource_class_directories:
     - '%kernel.project_dir%/src/User/Entity'
+    - '%kernel.project_dir%/src/Referensi/Entity'
   swagger:
     api_keys:
       JWT:

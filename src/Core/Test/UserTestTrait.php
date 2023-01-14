@@ -39,6 +39,6 @@ trait UserTestTrait
 
     protected function createClientAsAdmin(string $email='admin@example.com', string $password='password'): Client
     {
-        return $this->createClientAsUser($email, $password, [User::ROLE_ADMIN]);
+        return $this->createClientAsUser($email, $password, [User::ROLE_SUPER_ADMIN]);
     }
 }

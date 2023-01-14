@@ -84,6 +84,7 @@
     "require-dev": {
         "behat/behat": "^3.12",
         "behat/mink": "^1.10",
+        "dvdoug/behat-code-coverage": "^5.2",
         "friends-of-behat/mink-browserkit-driver": "^1.6",
         "friends-of-behat/mink-extension": "^2.7",
         "friends-of-behat/symfony-extension": "^2.4",
@@ -94,6 +95,7 @@
         "symfony/css-selector": "6.2.*",
         "symfony/debug-bundle": "6.2.*",
         "symfony/http-client": "6.2.*",
+        "symfony/maker-bundle": "^1.48",
         "symfony/monolog-bundle": "^3.0",
         "symfony/phpunit-bridge": "^6.2",
         "symfony/stopwatch": "6.2.*",
