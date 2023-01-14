@@ -25,4 +25,9 @@ class KeuskupanManager
     {
         return $this->repository->findOneBy(['nama' => $nama]);
     }
+
+    public function findByKode(string $kode): ?Keuskupan
+    {
+        return $this->repository->findOneBy(['kode' => $kode]);
+    }
 }

@@ -24,15 +24,15 @@ class Paroki
     #[ORM\ManyToOne(
         targetEntity: Keuskupan::class
     )]
-    private ?string $keuskupan;
+    private Keuskupan $keuskupan;
 
     #[ORM\Column(type: 'integer')]
     private int $nomor = 0;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 100)]
     private ?string $nama = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 100)]
     private ?string $gereja = null;
 
     #[ORM\Column(length: 150, nullable: true)]
@@ -88,23 +88,6 @@ class Paroki
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getKeuskupan(): ?string
-    {
-        return $this->keuskupan;
-    }
-
-    /**
-     * @param string|null $keuskupan
-     * @return Paroki
-     */
-    public function setKeuskupan(?string $keuskupan): Paroki
-    {
-        $this->keuskupan = $keuskupan;
-        return $this;
-    }
 
     /**
      * @return int
@@ -121,6 +104,24 @@ class Paroki
     public function setNomor(int $nomor): Paroki
     {
         $this->nomor = $nomor;
+        return $this;
+    }
+
+    /**
+     * @return Keuskupan
+     */
+    public function getKeuskupan(): Keuskupan
+    {
+        return $this->keuskupan;
+    }
+
+    /**
+     * @param Keuskupan $keuskupan
+     * @return Paroki
+     */
+    public function setKeuskupan(Keuskupan $keuskupan): Paroki
+    {
+        $this->keuskupan = $keuskupan;
         return $this;
     }
 

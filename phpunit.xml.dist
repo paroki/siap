@@ -30,6 +30,7 @@
         </include>
         <exclude>
             <directory>src/*/Test</directory>
+            <directory>src/Migration</directory>
         </exclude>
     </coverage>
 

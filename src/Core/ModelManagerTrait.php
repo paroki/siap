@@ -11,6 +11,7 @@ trait ModelManagerTrait
 {
     protected EntityManagerInterface $em;
     protected EntityRepository $repository;
+    protected string $identifierName = "id";
 
     public function save(object $object)
     {
@@ -22,5 +23,12 @@ trait ModelManagerTrait
     {
         $this->em->remove($object);
         $this->em->flush();
+    }
+
+    public function count(): int
+    {
+        $qb = $this->repository->createQueryBuilder('a');
+        $qb->select('count(a.'.$this->identifierName.')');
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

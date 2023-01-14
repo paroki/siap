@@ -37,4 +37,9 @@ services:
     Symfony\Component\PasswordHasher\PasswordHasherInterface:
         alias: Paroki\User\UserPasswordHasher
 
+    Paroki\Migration\Command\:
+        resource: '../src/Migration/Command'
+        tags:
+            - { name: 'console.command'}
+
 

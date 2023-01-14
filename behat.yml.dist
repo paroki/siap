@@ -30,6 +30,7 @@ default:
                 exclude:
                     directories:
                         'src/*/Test': ~
+                        'src/Migration': ~
             reports:
                 clover:
                     target: build/logs/behat/clover.xml
