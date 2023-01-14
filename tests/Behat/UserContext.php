@@ -128,7 +128,7 @@ class UserContext implements Context
     {
         $user = $this->findByEmail($email);
         $rest = $this->restContext;
-        $url = '/user/'.$user->getId();
+        $url = '/api/user/'.$user->getId();
 
         $rest->iSendARequestTo($method, $url, $body);
     }

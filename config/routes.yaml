@@ -6,3 +6,9 @@
 login:
   path: /login
   methods: ['POST']
+
+core_controllers:
+  resource:
+    path: ../src/Core/Controller/
+    namespace: Paroki\Core\Controller
+  type: attribute

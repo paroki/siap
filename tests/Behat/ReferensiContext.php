@@ -70,7 +70,7 @@ class ReferensiContext implements Context
     {
         $rest = $this->restContext;
 
-        $rest->iSendARequestToWithBody($method, '/keuskupan', $body);
+        $rest->iSendARequestToWithBody($method, '/api/keuskupan', $body);
     }
 
     /**
@@ -102,7 +102,7 @@ class ReferensiContext implements Context
         $rest = $this->restContext;
         $keuskupan = $this->keuskupan->findByNama($nama);
 
-        $rest->iSendARequestTo($method, '/keuskupan/'.$keuskupan->getId(), $body);
+        $rest->iSendARequestTo($method, '/api/keuskupan/'.$keuskupan->getId(), $body);
     }
 
     /**
@@ -147,6 +147,6 @@ class ReferensiContext implements Context
         $rest = $this->restContext;
         $paroki = $this->paroki->findByNama($nama);
 
-        $rest->iSendARequestTo($method, '/paroki/'.$paroki->getId(), $body);
+        $rest->iSendARequestTo($method, '/api/paroki/'.$paroki->getId(), $body);
     }
 }

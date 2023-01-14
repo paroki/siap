@@ -11,7 +11,7 @@ Feature:
 
   Scenario: Create new Keuskupan
     Given I don't have keuskupan "New Keuskupan"
-    When I send a POST request to "/keuskupan" with body:
+    When I send a POST request to "/api/keuskupan" with body:
     """
     {
       "kode": "099",

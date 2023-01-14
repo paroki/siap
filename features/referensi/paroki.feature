@@ -11,7 +11,7 @@ Feature:
 
   Scenario: Create new Paroki
     Given I don't have paroki "New Paroki"
-    When I send a POST request to "/paroki" with body:
+    When I send a POST request to "/api/paroki" with body:
     """
     {
       "kode": "099.001",

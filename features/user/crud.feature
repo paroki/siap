@@ -12,7 +12,7 @@ Feature:
 
   Scenario: Create new user
     Given I don't have user with email "new@example.com"
-    When I send a POST request to "/user" with body:
+    When I send a POST request to "/api/user" with body:
     """
     {
       "email": "new@example.com",
