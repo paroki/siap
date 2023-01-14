@@ -70,12 +70,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(targetEntity: Paroki::class)]
     private ?Paroki $paroki = null;
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $nama = null;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $telpon = null;
+
     /**
      * @return string|null
      */
     public function getId(): ?string
     {
         return $this->id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNama(): ?string
+    {
+        return $this->nama;
+    }
+
+    /**
+     * @param string|null $nama
+     * @return User
+     */
+    public function setNama(?string $nama): User
+    {
+        $this->nama = $nama;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTelpon(): ?string
+    {
+        return $this->telpon;
+    }
+
+    /**
+     * @param string|null $telpon
+     * @return User
+     */
+    public function setTelpon(?string $telpon): User
+    {
+        $this->telpon = $telpon;
+        return $this;
     }
 
     /**

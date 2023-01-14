@@ -122,6 +122,15 @@ class UserContext implements Context
     }
 
     /**
+     * @Given I have logged in with email :email and password :password
+     */
+    public function iHaveLoggedInWith(string $email, string $password)
+    {
+        $user = $this->iHaveUserWith($email, $password);
+        $this->iLoggedInWith($user);
+    }
+
+    /**
      * @Given I send a :method request for user :email
      */
     public function iSendARequestForUser(string $method, string $email, ?PyStringNode $body = null)
