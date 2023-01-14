@@ -5,11 +5,11 @@ namespace Paroki\Referensi;
 
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Paroki\Core\ModelManagerTrait;
 use Paroki\Referensi\Entity\Keuskupan;
+use Paroki\Referensi\Entity\Paroki;
 
-class KeuskupanManager
+class ParokiManager
 {
     use ModelManagerTrait;
 
@@ -18,10 +18,10 @@ class KeuskupanManager
     )
     {
         $this->em = $em;
-        $this->repository = $em->getRepository(Keuskupan::class);
+        $this->repository = $em->getRepository(Paroki::class);
     }
 
-    public function findByNama(string $nama): ?Keuskupan
+    public function findByNama(string $nama): ?Paroki
     {
         return $this->repository->findOneBy(['nama' => $nama]);
     }

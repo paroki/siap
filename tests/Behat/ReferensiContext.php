@@ -11,7 +11,9 @@ use Behatch\Context\JsonContext;
 use Behatch\Context\RestContext;
 use Behatch\Json\Json;
 use Paroki\Referensi\Entity\Keuskupan;
+use Paroki\Referensi\Entity\Paroki;
 use Paroki\Referensi\KeuskupanManager;
+use Paroki\Referensi\ParokiManager;
 use Paroki\User\Entity\User;
 
 class ReferensiContext implements Context
@@ -22,10 +24,18 @@ class ReferensiContext implements Context
     private KeuskupanManager $keuskupan;
     private RestContext $restContext;
     private JsonContext $jsonContext;
+    /**
+     * @var ParokiManager
+     */
+    private ParokiManager $paroki;
 
-    public function __construct(KeuskupanManager $keuskupan)
+    public function __construct(
+        KeuskupanManager $keuskupan,
+        ParokiManager $paroki
+    )
     {
         $this->keuskupan = $keuskupan;
+        $this->paroki = $paroki;
     }
 
     /**
@@ -84,8 +94,8 @@ class ReferensiContext implements Context
     }
 
     /**
-     * @Given I have send a :method request to keuskupan :nama
-     * @Given I have send a :method request to keuskupan :nama with body:
+     * @Given I send a :method request to keuskupan :nama
+     * @Given I send a :method request to keuskupan :nama with body:
      */
     public function iHaveSendRequestToUpdateKeuskupan(string $method, string $nama, ?PyStringNode $body=null)
     {
@@ -93,5 +103,50 @@ class ReferensiContext implements Context
         $keuskupan = $this->keuskupan->findByNama($nama);
 
         $rest->iSendARequestTo($method, '/keuskupan/'.$keuskupan->getId(), $body);
+    }
+
+    /**
+     * @Given I don't have paroki :nama
+     */
+    public function iDonTHaveParoki(string $nama): void
+    {
+        $manager = $this->paroki;
+        $paroki = $manager->findByNama($nama);
+
+        if($paroki instanceof Paroki){
+            $manager->remove($paroki);
+        }
+    }
+
+    /**
+     * @Given I have paroki with kode :kode and nama :nama
+     */
+    public function iHaveParokiWith(string $kode, string $nama)
+    {
+        $manager = $this->paroki;
+        $paroki = $manager->findByNama($nama);
+
+        if(!$paroki instanceof Paroki){
+            $paroki = new Paroki();
+        }
+
+        $paroki
+            ->setKode($kode)
+            ->setNama($nama)
+            ->setGereja($nama)
+        ;
+        $manager->save($paroki);
+    }
+
+    /**
+     * @Given I send a :method request to paroki :nama
+     * @Given I send a :method request to paroki :nama with body:
+     */
+    public function iHaveSendRequestToParoki(string $method, string $nama, ?PyStringNode $body=null)
+    {
+        $rest = $this->restContext;
+        $paroki = $this->paroki->findByNama($nama);
+
+        $rest->iSendARequestTo($method, '/paroki/'.$paroki->getId(), $body);
     }
 }

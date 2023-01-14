@@ -10,12 +10,12 @@ Feature:
     And I have keuskupan with kode "100" and nama "Existing Keuskupan"
 
   Scenario: Create new Keuskupan
-    Given I don't have keuskupan "Test Keuskupan"
+    Given I don't have keuskupan "New Keuskupan"
     When I send a POST request to "/keuskupan" with body:
     """
     {
       "kode": "099",
-      "nama": "Test Keuskupan",
+      "nama": "New Keuskupan",
       "nomor": 99,
       "namaLatin": "Nama Latin",
       "alamat": "alamat",
@@ -30,13 +30,13 @@ Feature:
     Then the response status code should be 201
 
   Scenario: Read existing keuskupan
-    Given I have send a GET request to keuskupan "Existing Keuskupan"
+    Given I send a GET request to keuskupan "Existing Keuskupan"
     Then the response status code should be 200
     And the response should be in JSON
     And the JSON node kode should be equal to "100"
 
   Scenario: Update existing keuskupan
-    Given I have send a PUT request to keuskupan "Existing Keuskupan" with body:
+    Given I send a PUT request to keuskupan "Existing Keuskupan" with body:
     """
     {
       "kode": "100",
@@ -48,5 +48,5 @@ Feature:
     And the JSON node alamat should be equal to "Test Alamat"
 
   Scenario: Delete existing keuskupan
-    Given I have send a DELETE request to keuskupan "Existing Keuskupan"
+    Given I send a DELETE request to keuskupan "Existing Keuskupan"
     Then the response status code should be 204
