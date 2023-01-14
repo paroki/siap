@@ -13,13 +13,20 @@
         </CNavItem>
       </CHeaderNav>
     </CContainer>
+    <CContainer fluid>
+      <AppBreadcrumb />
+    </CContainer>
   </CHeader>
 </template>
 <script>
-import { logo } from "../styles/brand/logo";
+import AppBreadcrumb from "./AppBreadcrumb";
+import { logo } from "../../styles/brand/logo";
 
 export default {
   name: 'AppHeader',
+  components: {
+    AppBreadcrumb
+  },
   setup(){
     return {
       logo

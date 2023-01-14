@@ -1,8 +1,51 @@
 import {createRouter, createWebHashHistory} from "vue-router"
-import DefaultLayout from './layouts/DefaultLayout'
+import DefaultLayout from './ui/layouts/DefaultLayout'
 import isObject from "@coreui/vue";
 import auth from "./services/auth";
 
+const sakramen = [
+    {
+        name: 'Baptis',
+        path: '/baptis',
+        component: () => import(/* webpackChunkName: "login" */ './ui/pages/UnderConstruction.vue'),
+    },
+    {
+        name: 'Komuni',
+        path: '/komuni',
+        component: () => import(/* webpackChunkName: "login" */ './ui/pages/UnderConstruction.vue'),
+    },
+    {
+        name: 'Krisma',
+        path: '/krisma',
+        component: () => import(/* webpackChunkName: "login" */ './ui/pages/UnderConstruction.vue'),
+    },
+    {
+        name: 'Perkawinan',
+        path: '/perkawinan',
+        component: () => import(/* webpackChunkName: "login" */ './ui/pages/UnderConstruction.vue'),
+    },
+    {
+        name: 'Perminyakan',
+        path: '/perminyakan',
+        component: () => import(/* webpackChunkName: "login" */ './ui/pages/UnderConstruction.vue'),
+    }
+];
+
+const profile = [
+    {
+        name: "Profile",
+        path: '/profile',
+        redirect: "/profile/update-password",
+        component: DefaultLayout,
+        children: [
+            {
+                name: 'Update Password',
+                path: '/profile/update-password',
+                component: () => import(/* webpackChunkName: "login" */ './components/user/UpdatePassword'),
+            },
+        ]
+    },
+];
 const routes = [
     {
         path: '/',
@@ -13,7 +56,7 @@ const routes = [
             {
                 path: '/dashboard',
                 name: 'Dashboard',
-                component: () => import(/* webpackChunkName: "dashboard" */ './pages/Dashboard.vue'),
+                component: () => import(/* webpackChunkName: "dashboard" */ './ui/pages/Dashboard.vue'),
             }
         ],
         meta: {
@@ -45,7 +88,15 @@ const routes = [
         path: '/reset-password',
         name: 'ResetPassword',
         component: () => import(/* webpackChunkName: "login" */ './ui/pages/ResetPassword.vue'),
-    }
+    },
+    {
+        name: 'Sakramen',
+        component: DefaultLayout,
+        redirect: '/baptis',
+        children: sakramen,
+        path: '/sakramen'
+    },
+    ...profile
 ]
 
 const router = createRouter({

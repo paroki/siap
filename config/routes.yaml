@@ -21,3 +21,10 @@ core_controllers:
   options:
     expose: true
 
+user_controllers:
+  resource:
+    path: ../src/User/Controller/
+    namespace: Paroki\User\Controller
+  type: attribute
+  options:
+    expose: true

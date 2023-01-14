@@ -34,8 +34,8 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { AppSidebarNav } from './AppSidebarNav'
-import { logoNegative } from '../styles/brand/logo-negative'
-import { sygnet } from '../styles/brand/sygnet'
+import { logoNegative } from '../../styles/brand/logo-negative'
+import { sygnet } from '../../styles/brand/sygnet'
 
 export default {
   name: 'AppSidebar',

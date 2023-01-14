@@ -13,9 +13,9 @@
   </div>
 </template>
 <script>
-import AppSidebar from "./AppSidebar";
-import AppHeader from './AppHeader';
-import AppFooter from "./AppFooter";
+import AppSidebar from "../components/AppSidebar";
+import AppHeader from '../components/AppHeader';
+import AppFooter from "../components/AppFooter";
 
 export default {
   components: {AppFooter, AppSidebar, AppHeader}
