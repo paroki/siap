@@ -61,6 +61,7 @@
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
+        "friendsofsymfony/jsrouting-bundle": "^3.2",
         "gedmo/doctrine-extensions": "3.11.x-dev",
         "lexik/jwt-authentication-bundle": "^2.16",
         "nelmio/cors-bundle": "^2.2",

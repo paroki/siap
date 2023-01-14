@@ -1,4 +1,6 @@
 const Encore = require('@symfony/webpack-encore');
+const dotenv = require('dotenv-webpack');
+const FosRouting = require('fos-router/webpack/FosRouting');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -20,7 +22,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/app.js')
+    .addEntry('app', './assets/main.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -54,7 +56,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -70,6 +72,14 @@ Encore
     //.autoProvidejQuery()
 
     .enableVueLoader()
+    .addPlugin(new dotenv({
+
+    }))
+    .addPlugin(new FosRouting())
+    .configureDefinePlugin(options => {
+        options['__VUE_OPTIONS_API__'] = Encore.isDev();
+        options['__VUE_PROD_DEVTOOLS__'] = Encore.isDev();
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

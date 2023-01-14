@@ -3,12 +3,21 @@
 #        path: ../src/User/Controller/
 #        namespace: Paroki\User\Controller
 #    type: attribute
+
+fos_js_routing:
+  resource: "@FOSJsRoutingBundle/Resources/config/routing/routing-sf4.xml"
+
 login:
   path: /login
   methods: ['POST']
+  options:
+    expose: true
 
 core_controllers:
   resource:
     path: ../src/Core/Controller/
     namespace: Paroki\Core\Controller
   type: attribute
+  options:
+    expose: true
+

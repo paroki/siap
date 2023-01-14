@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/', methods: ['GET'])]
+    #[Route('/', name: 'dashboard', methods: ['GET'])]
     public function homepage(): Response
     {
         return $this->render('core/homepage.html.twig');
