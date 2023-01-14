@@ -21,6 +21,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Referensi/Entity'
                 prefix: 'Paroki\Referensi\Entity'
                 alias: Referensi
+            gedmo_loggable:
+                type: annotation
+                prefix: Gedmo\Loggable\Entity
+                dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Loggable/Entity"
+                alias: GedmoLoggable # (optional) it will default to the name set for the mapping
+                is_bundle: false
 
 when@test:
     doctrine:

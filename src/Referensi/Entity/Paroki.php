@@ -3,9 +3,12 @@
 
 namespace Paroki\Referensi\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use Paroki\User\Entity\User;
 use Symfony\Bridge\Doctrine\Types\UuidType;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ApiResource()]
 #[ORM\Entity()]
@@ -61,6 +64,13 @@ class Paroki
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $wilayahKeuskupan = null;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[Gedmo\Timestampable()]
+    private \DateTimeImmutable $updatedAt;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    private ?User $updatedBy = null;
 
     /**
      * @return string|null
@@ -302,6 +312,42 @@ class Paroki
     public function setWilayahKeuskupan(?string $wilayahKeuskupan): Paroki
     {
         $this->wilayahKeuskupan = $wilayahKeuskupan;
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeImmutable $updatedAt
+     * @return Paroki
+     */
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): Paroki
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    /**
+     * @param User|null $updatedBy
+     * @return Paroki
+     */
+    public function setUpdatedBy(?User $updatedBy): Paroki
+    {
+        $this->updatedBy = $updatedBy;
         return $this;
     }
 }

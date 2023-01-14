@@ -5,10 +5,13 @@ namespace Paroki\Referensi\Entity;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Paroki\User\Entity\User;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ApiResource()]
 #[ORM\Entity]
@@ -56,6 +59,13 @@ class Keuskupan
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $uskup = null;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[Gedmo\Timestampable()]
+    private \DateTimeImmutable $updatedAt;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    private ?User $updatedBy = null;
 
     /**
      * @return string|null
@@ -260,6 +270,42 @@ class Keuskupan
     public function setUskup(?string $uskup): Keuskupan
     {
         $this->uskup = $uskup;
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeImmutable $updatedAt
+     * @return Keuskupan
+     */
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): Keuskupan
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    /**
+     * @param User|null $updatedBy
+     * @return Keuskupan
+     */
+    public function setUpdatedBy(?User $updatedBy): Keuskupan
+    {
+        $this->updatedBy = $updatedBy;
         return $this;
     }
 }

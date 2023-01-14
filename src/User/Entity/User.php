@@ -3,8 +3,6 @@
 
 namespace Paroki\User\Entity;
 
-
-use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
@@ -12,6 +10,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use Paroki\Referensi\Entity\Paroki;
 use Paroki\User\UserPasswordHasher;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
@@ -68,12 +67,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private array $roles = [self::ROLE_USER];
 
+    #[ORM\ManyToOne(targetEntity: Paroki::class)]
+    private ?Paroki $paroki = null;
+
     /**
      * @return string|null
      */
     public function getId(): ?string
     {
         return $this->id;
+    }
+
+    /**
+     * @return Paroki|null
+     */
+    public function getParoki(): ?Paroki
+    {
+        return $this->paroki;
+    }
+
+    /**
+     * @param Paroki|null $paroki
+     * @return User
+     */
+    public function setParoki(?Paroki $paroki): User
+    {
+        $this->paroki = $paroki;
+        return $this;
     }
 
     /**
