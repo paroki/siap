@@ -3,17 +3,14 @@
 
 namespace Paroki\Referensi\Entity;
 
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Types\UuidType;
-use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Bridge\Doctrine\Types\UuidType;
 
 #[ApiResource()]
-#[ORM\Entity]
-#[ORM\Table(name: 'ref_keuskupan')]
-class Keuskupan
+#[ORM\Entity()]
+#[ORM\Table(name: 'ref_paroki')]
+class Paroki
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -21,17 +18,22 @@ class Keuskupan
     #[ORM\Column(type: UuidType::NAME)]
     private ?string $id = null;
 
-    #[ORM\Column(type: 'string', length: 3, unique: true)]
+    #[ORM\Column(type: 'string', length: 7, unique: true)]
     private ?string $kode = null;
+
+    #[ORM\ManyToOne(
+        targetEntity: Keuskupan::class
+    )]
+    private ?string $keuskupan;
 
     #[ORM\Column(type: 'integer')]
     private int $nomor = 0;
 
-    #[ORM\Column(type: 'string', length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $nama = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $namaLatin = null;
+    #[ORM\Column(length: 50)]
+    private ?string $gereja = null;
 
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $alamat = null;
@@ -55,7 +57,10 @@ class Keuskupan
     private ?string $email = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    private ?string $uskup = null;
+    private ?string $pastorParoki = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $wilayahKeuskupan = null;
 
     /**
      * @return string|null
@@ -75,11 +80,29 @@ class Keuskupan
 
     /**
      * @param string|null $kode
-     * @return Keuskupan
+     * @return Paroki
      */
-    public function setKode(?string $kode): Keuskupan
+    public function setKode(?string $kode): Paroki
     {
         $this->kode = $kode;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getKeuskupan(): ?string
+    {
+        return $this->keuskupan;
+    }
+
+    /**
+     * @param string|null $keuskupan
+     * @return Paroki
+     */
+    public function setKeuskupan(?string $keuskupan): Paroki
+    {
+        $this->keuskupan = $keuskupan;
         return $this;
     }
 
@@ -93,9 +116,9 @@ class Keuskupan
 
     /**
      * @param int $nomor
-     * @return Keuskupan
+     * @return Paroki
      */
-    public function setNomor(int $nomor): Keuskupan
+    public function setNomor(int $nomor): Paroki
     {
         $this->nomor = $nomor;
         return $this;
@@ -111,9 +134,9 @@ class Keuskupan
 
     /**
      * @param string|null $nama
-     * @return Keuskupan
+     * @return Paroki
      */
-    public function setNama(?string $nama): Keuskupan
+    public function setNama(?string $nama): Paroki
     {
         $this->nama = $nama;
         return $this;
@@ -122,18 +145,18 @@ class Keuskupan
     /**
      * @return string|null
      */
-    public function getNamaLatin(): ?string
+    public function getGereja(): ?string
     {
-        return $this->namaLatin;
+        return $this->gereja;
     }
 
     /**
-     * @param string|null $namaLatin
-     * @return Keuskupan
+     * @param string|null $gereja
+     * @return Paroki
      */
-    public function setNamaLatin(?string $namaLatin): Keuskupan
+    public function setGereja(?string $gereja): Paroki
     {
-        $this->namaLatin = $namaLatin;
+        $this->gereja = $gereja;
         return $this;
     }
 
@@ -147,9 +170,9 @@ class Keuskupan
 
     /**
      * @param string|null $alamat
-     * @return Keuskupan
+     * @return Paroki
      */
-    public function setAlamat(?string $alamat): Keuskupan
+    public function setAlamat(?string $alamat): Paroki
     {
         $this->alamat = $alamat;
         return $this;
@@ -165,9 +188,9 @@ class Keuskupan
 
     /**
      * @param string|null $kota
-     * @return Keuskupan
+     * @return Paroki
      */
-    public function setKota(?string $kota): Keuskupan
+    public function setKota(?string $kota): Paroki
     {
         $this->kota = $kota;
         return $this;
@@ -183,9 +206,9 @@ class Keuskupan
 
     /**
      * @param string|null $telepon
-     * @return Keuskupan
+     * @return Paroki
      */
-    public function setTelepon(?string $telepon): Keuskupan
+    public function setTelepon(?string $telepon): Paroki
     {
         $this->telepon = $telepon;
         return $this;
@@ -201,9 +224,9 @@ class Keuskupan
 
     /**
      * @param string|null $fax
-     * @return Keuskupan
+     * @return Paroki
      */
-    public function setFax(?string $fax): Keuskupan
+    public function setFax(?string $fax): Paroki
     {
         $this->fax = $fax;
         return $this;
@@ -219,9 +242,9 @@ class Keuskupan
 
     /**
      * @param string|null $website
-     * @return Keuskupan
+     * @return Paroki
      */
-    public function setWebsite(?string $website): Keuskupan
+    public function setWebsite(?string $website): Paroki
     {
         $this->website = $website;
         return $this;
@@ -237,9 +260,9 @@ class Keuskupan
 
     /**
      * @param string|null $email
-     * @return Keuskupan
+     * @return Paroki
      */
-    public function setEmail(?string $email): Keuskupan
+    public function setEmail(?string $email): Paroki
     {
         $this->email = $email;
         return $this;
@@ -248,18 +271,36 @@ class Keuskupan
     /**
      * @return string|null
      */
-    public function getUskup(): ?string
+    public function getPastorParoki(): ?string
     {
-        return $this->uskup;
+        return $this->pastorParoki;
     }
 
     /**
-     * @param string|null $uskup
-     * @return Keuskupan
+     * @param string|null $pastorParoki
+     * @return Paroki
      */
-    public function setUskup(?string $uskup): Keuskupan
+    public function setPastorParoki(?string $pastorParoki): Paroki
     {
-        $this->uskup = $uskup;
+        $this->pastorParoki = $pastorParoki;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getWilayahKeuskupan(): ?string
+    {
+        return $this->wilayahKeuskupan;
+    }
+
+    /**
+     * @param string|null $wilayahKeuskupan
+     * @return Paroki
+     */
+    public function setWilayahKeuskupan(?string $wilayahKeuskupan): Paroki
+    {
+        $this->wilayahKeuskupan = $wilayahKeuskupan;
         return $this;
     }
 }

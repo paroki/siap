@@ -6,6 +6,7 @@ default:
                 - behatch:context:rest
                 - behatch:context:json
                 - Paroki\Tests\Behat\UserContext
+                - Paroki\Tests\Behat\ReferensiContext
 
     extensions:
         FriendsOfBehat\SymfonyExtension:
