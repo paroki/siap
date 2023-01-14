@@ -132,6 +132,7 @@ jobs:
       - name: Run behat tests
         run: |
           mkdir -p build/logs/behat
+          ls -l build/logs behat
           vendor/bin/behat -fprogress
       - name: Upload test artifacts
         if: always()
