@@ -31,6 +31,6 @@ default:
                         'src/*/Test': ~
             reports:
                 clover:
-                    target: build/logs/behat.xml
+                    target: build/logs/behat/clover.xml
                 text:
                     showColors: true
