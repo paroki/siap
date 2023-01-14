@@ -138,7 +138,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: behat-logs-php${{ matrix.php }}
-          path: var/logs
+          path: var/log
         continue-on-error: true
       - name: Upload coverage results to Codecov
         if: matrix.coverage
