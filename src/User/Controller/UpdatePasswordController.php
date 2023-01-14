@@ -19,13 +19,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UpdatePasswordController extends AbstractController
 {
-    /**
-     * @param Request $request
-     * @param UserInterface|User $user
-     * @param UserManager $userManager
-     * @param UserPasswordHasherInterface $hasher
-     * @return Response
-     */
     #[Route('/user/update-password', 'user_update_password', methods: ['POST'])]
     public function save(
         Request $request,
