@@ -21,3 +21,16 @@ default:
                 default:
                     symfony: ~
         Behatch\Extension: ~
+        DVDoug\Behat\CodeCoverage\Extension:
+            filter:
+                include:
+                    directories:
+                        'src': ~
+                exclude:
+                    directories:
+                        'src/*/Test': ~
+            reports:
+                clover:
+                    target: behat/logs/behat
+                text:
+                    showColors: true

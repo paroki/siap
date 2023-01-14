@@ -7,30 +7,38 @@ namespace Paroki\Tests\Behat;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\PyStringNode;
+use Behatch\Context\JsonContext;
 use Behatch\Context\RestContext;
+use Doctrine\ORM\EntityRepository;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Paroki\Tests\Behat\Concern\Doctrine;
 use Paroki\Tests\Behat\Concern\ServiceManager;
 use Paroki\User\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UserContext implements Context
 {
-    /**
-     * @var KernelInterface
-     */
     use ServiceManager, Doctrine;
 
-    /**
-     * @var UserPasswordHasherInterface
-     */
     private UserPasswordHasherInterface $hasher;
     private RestContext $restContext;
+    private JsonContext $jsonContext;
+    private JWTTokenManagerInterface $jwt;
+    private UrlGeneratorInterface $router;
 
-    public function __construct(KernelInterface $kernel, UserPasswordHasherInterface $hasher)
-    {
+    public function __construct(
+        KernelInterface $kernel,
+        UserPasswordHasherInterface $hasher,
+        JWTTokenManagerInterface $jwt,
+        UrlGeneratorInterface $router
+    ){
         $this->setKernel($kernel);
         $this->hasher = $hasher;
+        $this->jwt = $jwt;
+        $this->router = $router;
     }
 
     /**
@@ -41,6 +49,7 @@ class UserContext implements Context
         $env = $scope->getEnvironment();
 
         $this->restContext = $env->getContext(RestContext::class);
+        $this->jsonContext = $env->getContext(JsonContext::class);
     }
 
     /**
@@ -56,11 +65,24 @@ class UserContext implements Context
     }
 
     /**
-     * @Given I have user with email :email and password :password
+     * @Given I don't have user with email :email
      */
-    public function iHaveUserWith(string $email, string $password, array $roles = ['ROLE_USER']): User
+    public function iDonTHaveUserWith(string $email)
     {
-        $user = $this->getRepository(User::class)->findOneBy([
+        $user = $this->findByEmail($email);
+
+        if(!is_null($user)){
+            $this->remove($user);
+        }
+    }
+
+    /**
+     * @Given I have user with email :email and password :password
+     * @Given I have user with email :email
+     */
+    public function iHaveUserWith(string $email, string $password='password', array $roles = ['ROLE_USER']): User
+    {
+        $user = $this->getUserRepository()->findOneBy([
             'email' => $email
         ]);
         $hasher = $this->hasher;
@@ -79,5 +101,45 @@ class UserContext implements Context
         return $user;
     }
 
+    public function iLoggedInWith($user)
+    {
+        $rest = $this->restContext;
+        $jwt = $this->jwt;
 
+        $token = $jwt->create($user);
+        $rest->iAddHeaderEqualTo('Authorization', 'Bearer '.$token);
+    }
+
+    /**
+     * @Given I have logged in as paroki admin
+     */
+    public function iHaveLoggedInAsAdmin()
+    {
+        $email = 'admin@example.com';
+        $password = 'password';
+        $user = $this->iHaveUserWith($email, $password, [User::ROLE_PAROKI_ADMIN]);
+        $this->iLoggedInWith($user);
+    }
+
+    /**
+     * @Given I send a :method request for user :email
+     */
+    public function iSendARequestForUser(string $method, string $email, ?PyStringNode $body = null)
+    {
+        $user = $this->findByEmail($email);
+        $rest = $this->restContext;
+        $url = '/users/'.$user->getId();
+
+        $rest->iSendARequestTo($method, $url, $body);
+    }
+
+    public function getUserRepository(): EntityRepository
+    {
+        return $this->getEntityManager()->getRepository(User::class);
+    }
+
+    public function findByEmail(string $email): ?User
+    {
+        return $this->getUserRepository()->findOneBy(['email' => $email]);
+    }
 }

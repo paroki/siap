@@ -84,6 +84,7 @@
     "require-dev": {
         "behat/behat": "^3.12",
         "behat/mink": "^1.10",
+        "dvdoug/behat-code-coverage": "^5.2",
         "friends-of-behat/mink-browserkit-driver": "^1.6",
         "friends-of-behat/mink-extension": "^2.7",
         "friends-of-behat/symfony-extension": "^2.4",

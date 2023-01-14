@@ -21,3 +21,11 @@ Feature:
     | code    | 401                  |
     | message | Invalid credentials. |
 
+  Scenario: Login with invalid username
+    When I am sign in with email "foo@example.com" and password "password"
+    Then the response status code should be 401
+    And the response should be in JSON
+    And the JSON nodes should contain:
+      | code    | 401                  |
+      | message | Invalid credentials. |
+

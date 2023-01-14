@@ -18,4 +18,16 @@ trait Doctrine
     {
         return $this->getEntityManager()->getRepository($class);
     }
+
+    public function save(object $object): void
+    {
+        $this->getEntityManager()->persist($object);
+        $this->getEntityManager()->flush();
+    }
+
+    public function remove(object $object): void
+    {
+        $this->getEntityManager()->remove($object);
+        $this->getEntityManager()->flush();
+    }
 }
